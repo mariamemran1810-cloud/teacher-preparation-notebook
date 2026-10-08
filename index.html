@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كراسة تحضير الدروس</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Arial, sans-serif;
+            background: #f5f5f5;
+            padding: 20px;
+            line-height: 1.8;
+        }
+        
+        .page {
+            max-width: 210mm;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            page-break-after: always;
+        }
+        
+        .page:last-child {
+            page-break-after: avoid;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #1a5276;
+            border-bottom: 3px solid #1a5276;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            font-size: 28px;
+        }
+        
+        h2 {
+            color: #2874a6;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            padding: 10px 15px;
+            background: #eaf2f8;
+            border-right: 4px solid #2874a6;
+            font-size: 20px;
+        }
+        
+        h3 {
+            color: #1a5276;
+            margin-top: 20px;
+            margin-bottom: 10px;
+            font-size: 17px;
+        }
+        
+        .section {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fafafa;
+        }
+        
+        .field {
+            margin-bottom: 12px;
+        }
+        
+        .field label {
+            display: block;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .field input, .field textarea, .field select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            font-family: inherit;
+        }
+        
+        .field textarea {
+            min-height: 80px;
+            resize: vertical;
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .grid-3 {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .objective-box {
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .cognitive {
+            background: #d4efdf;
+            border-right: 4px solid #27ae60;
+        }
+        
+        .psychomotor {
+            background: #d6eaf8;
+            border-right: 4px solid #2980b9;
+        }
+        
+        .affective {
+            background: #fadbd8;
+            border-right: 4px solid #e74c3c;
+        }
+        
+        .objective-box h4 {
+            margin-bottom: 8px;
+            font-size: 16px;
+        }
+        
+        .cognitive h4 { color: #1e8449; }
+        .psychomotor h4 { color: #2471a3; }
+        .affective h4 { color: #c0392b; }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        
+        th, td {
+            border: 1px solid #bbb;
+            padding: 10px;
+            text-align: center;
+        }
+        
+        th {
+            background: #2874a6;
+            color: white;
+            font-weight: bold;
+        }
+        
+        tr:nth-child(even) {
+            background: #f2f2f2;
+        }
+        
+        .lesson-steps {
+            counter-reset: step;
+        }
+        
+        .step {
+            position: relative;
+            padding: 15px 15px 15px 60px;
+            margin-bottom: 12px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            right: 15px;
+            top: 15px;
+            width: 35px;
+            height: 35px;
+            background: #2874a6;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 16px;
+        }
+        
+        .step-time {
+            position: absolute;
+            left: 15px;
+            top: 15px;
+            background: #e74c3c;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+        }
+        
+        .support-section {
+            background: #fef9e7;
+            border: 2px solid #f39c12;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .support-section h4 {
+            color: #d68910;
+            margin-bottom: 10px;
+        }
+        
+        .remedial-section {
+            background: #fdedec;
+            border: 2px solid #e74c3c;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .remedial-section h4 {
+            color: #c0392b;
+            margin-bottom: 10px;
+        }
+        
+        .enrichment-section {
+            background: #e8f8f5;
+            border: 2px solid #1abc9c;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        
+        .enrichment-section h4 {
+            color: #148f77;
+            margin-bottom: 10px;
+        }
+        
+        .notes-area {
+            min-height: 200px;
+            border: 2px dashed #999;
+            border-radius: 8px;
+            padding: 15px;
+            background: #fffef0;
+        }
+        
+        .header-info {
+            text-align: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .title-section h1 {
+            border: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .title-section p {
+            color: #666;
+            margin-top: 5px;
+        }
+        
+        .cv-section {
+            margin-bottom: 20px;
+        }
+        
+        .cv-section h3 {
+            color: #1a5276;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 5px;
+        }
+        
+        .cv-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .cv-item {
+            padding: 8px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .cv-item strong {
+            color: #2874a6;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        
+        .checkbox-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        
+        .checkbox-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .signature-area {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+        }
+        
+        .signature-box {
+            text-align: center;
+        }
+        
+        .signature-box .line {
+            width: 200px;
+            border-bottom: 1px solid #333;
+            margin-bottom: 5px;
+            height: 40px;
+        }
+        
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+            }
+            .page {
+                box-shadow: none;
+                margin: 0;
+                padding: 20px;
+            }
+        }
+        
+        .sidebar {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 280px;
+            height: 100vh;
+            background: linear-gradient(180deg, #1a5276 0%, #154360 100%);
+            padding: 20px 0;
+            overflow-y: auto;
+            z-index: 1000;
+            box-shadow: -2px 0 10px rgba(0,0,0,0.2);
+        }
+        
+        .sidebar-header {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            margin-bottom: 10px;
+        }
+        
+        .sidebar-header h2 {
+            color: white;
+            font-size: 20px;
+            margin: 0;
+            padding: 0;
+            background: none;
+            border: none;
+        }
+        
+        .sidebar-header p {
+            color: #85c1e9;
+            font-size: 12px;
+            margin-top: 5px;
+        }
+        
+        .sidebar-menu {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .sidebar-menu li {
+            margin: 2px 10px;
+        }
+        
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 15px;
+            color: #d4e6f1;
+            text-decoration: none;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-size: 14px;
+        }
+        
+        .sidebar-menu a:hover {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            transform: translateX(-5px);
+        }
+        
+        .sidebar-menu a.active {
+            background: rgba(255,255,255,0.2);
+            color: white;
+            font-weight: bold;
+        }
+        
+        .sidebar-menu .icon {
+            font-size: 18px;
+            width: 24px;
+            text-align: center;
+        }
+        
+        .main-content {
+            margin-right: 280px;
+            padding: 20px;
+        }
+        
+        .tab-buttons {
+            display: none;
+        }
+        
+        .page-content {
+            display: none;
+        }
+        
+        .page-content.active {
+            display: block;
+        }
+        
+        .progress-tracker {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        
+        .progress-tracker input[type="text"] {
+            flex: 1;
+        }
+        
+        .progress-tracker select {
+            width: 120px;
+        }
+        
+        .grade-input {
+            width: 60px !important;
+            text-align: center;
+        }
+        
+        .strategy-tag {
+            display: inline-block;
+            padding: 5px 12px;
+            margin: 3px;
+            background: #e8f4f8;
+            border: 1px solid #2874a6;
+            border-radius: 15px;
+            font-size: 13px;
+            color: #1a5276;
+        }
+        
+        .activity-box {
+            background: #f0f8ff;
+            border: 1px solid #b8daff;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+        
+        .assessment-box {
+            background: #fff8e1;
+            border: 1px solid #ffc107;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- القائمة الجانبية -->
+<nav class="sidebar">
+    <div class="sidebar-header">
+        <h2>🏠 الرئيسية</h2>
+        <p>نظام إدارة التعليم</p>
+    </div>
+    <ul class="sidebar-menu">
+        <li><a href="#" class="active" onclick="showPage('page1')"><span class="icon">🏠</span> الرئيسية</a></li>
+        <li><a href="#" onclick="showPage('page2')"><span class="icon">🤖</span> مساعد المعلم</a></li>
+        <li><a href="#" onclick="showPage('page2')"><span class="icon">📚</span> التحضير الإلكتروني</a></li>
+        <li><a href="#" onclick="showPage('page3')"><span class="icon">📝</span> الاختبارات</a></li>
+        <li><a href="#" onclick="showPage('page4')"><span class="icon">👨‍🎓</span> الطلاب</a></li>
+        <li><a href="#" onclick="showPage('page3')"><span class="icon">📊</span> التحليلات</a></li>
+        <li><a href="#"><span class="icon">📖</span> المكتبة</a></li>
+        <li><a href="#"><span class="icon">🎨</span> استوديو المعلم</a></li>
+        <li><a href="#"><span class="icon">🎓</span> أكاديمية المعلم</a></li>
+        <li><a href="#"><span class="icon">👥</span> مجتمع المعلمين</a></li>
+        <li><a href="#"><span class="icon">⚙️</span> الإعدادات</a></li>
+    </ul>
+</nav>
+
+<!-- المحتوى الرئيسي -->
+<div class="main-content">
+
+<!-- الصفحة الأولى: السيرة الذاتية -->
+<div id="page1" class="page-content active">
+    <div class="page">
+        <div class="header-info">
+            <div class="title-section">
+                <h1>كراسة تحضير الدروس</h1>
+                <p>العام الدراسي: 2024 - 2025</p>
+            </div>
+        </div>
+        
+        <h2>📋 السيرة الذاتية للمعلم</h2>
+        
+        <div class="cv-section">
+            <h3>البيانات الشخصية</h3>
+            <div class="cv-grid">
+                <div class="cv-item">
+                    <strong>الاسم الكامل:</strong>
+                    <input type="text" placeholder="أدخل اسمك الكامل">
+                </div>
+                <div class="cv-item">
+                    <strong>التخصص:</strong>
+                    <input type="text" placeholder="مثال: رياضيات، لغة عربية...">
+                </div>
+                <div class="cv-item">
+                    <strong>المؤهل العلمي:</strong>
+                    <input type="text" placeholder="مثال: بكالوريوس، ماجستير...">
+                </div>
+                <div class="cv-item">
+                    <strong>سنوات الخبرة:</strong>
+                    <input type="text" placeholder="مثال: 10 سنوات">
+                </div>
+                <div class="cv-item">
+                    <strong>رقم الهاتف:</strong>
+                    <input type="tel" placeholder="05xxxxxxxx">
+                </div>
+                <div class="cv-item">
+                    <strong>البريد الإلكتروني:</strong>
+                    <input type="email" placeholder="example@email.com">
+                </div>
+            </div>
+        </div>
+        
+        <div class="cv-section">
+            <h3>الشهادات والدورات التدريبية</h3>
+            <div class="field">
+                <textarea placeholder="اذكر الشهادات والدورات التدريبية التي حصلت عليها..."></textarea>
+            </div>
+        </div>
+        
+        <div class="cv-section">
+            <h3>المهارات والكفاءات</h3>
+            <div class="field">
+                <textarea placeholder="اذكر المهارات التي تمتلكها في مجال التدريس..."></textarea>
+            </div>
+        </div>
+        
+        <div class="cv-section">
+            <h3>الإنجازات والجوائز</h3>
+            <div class="field">
+                <textarea placeholder="اذكر الإنجازات والجوائز التي حققتها..."></textarea>
+            </div>
+        </div>
+        
+        <div class="cv-section">
+            <h3>فلسفة التدريس</h3>
+            <div class="field">
+                <textarea placeholder="اكتب فلسفتك في التدريس وأهدافك التربوية..."></textarea>
+            </div>
+        </div>
+        
+        <div class="signature-area">
+            <div class="signature-box">
+                <div class="line"></div>
+                <p>توقيع المعلم</p>
+            </div>
+            <div class="signature-box">
+                <div class="line"></div>
+                <p>مدير المدرسة</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- الصفحة الثانية: التحضير اليومي -->
+<div id="page2" class="page-content">
+    <div class="page">
+        <h1>تحضير الدرس اليومي</h1>
+        
+        <div class="section">
+            <div class="grid-3">
+                <div class="field">
+                    <label>التاريخ:</label>
+                    <input type="date">
+                </div>
+                <div class="field">
+                    <label>الصف:</label>
+                    <input type="text" placeholder="مثال: الصف الثالث">
+                </div>
+                <div class="field">
+                    <label>المادة:</label>
+                    <input type="text" placeholder="مثال: الرياضيات">
+                </div>
+            </div>
+            <div class="grid-2">
+                <div class="field">
+                    <label>عنوان الدرس:</label>
+                    <input type="text" placeholder="موضوع الدرس">
+                </div>
+                <div class="field">
+                    <label>الحصة:</label>
+                    <input type="text" placeholder="مثال: الحصة الثالثة">
+                </div>
+            </div>
+        </div>
+        
+        <h2>🎯 الأهداف التعليمية</h2>
+        
+        <div class="objective-box cognitive">
+            <h4>🎓 الهدف المعرفي (المعرفي)</h4>
+            <p><small>يخص المعلومات والمعارف التي يجب أن يكتسبها الطالب</small></p>
+            <div class="field">
+                <textarea placeholder="مثال: أن يذكر الطالب تعريف الكسر وأنواعه..."></textarea>
+            </div>
+        </div>
+        
+        <div class="objective-box psychomotor">
+            <h4>🛠️ الهدف المهاري (النفس حركي)</h4>
+            <p><small>يخص المهارات العملية والحركية التي يجب أن يتقنها الطالب</small></p>
+            <div class="field">
+                <textarea placeholder="مثال: أن يتمكن الطالب من حل مسائل جمع الكسور..."></textarea>
+            </div>
+        </div>
+        
+        <div class="objective-box affective">
+            <h4>❤️ الهدف الوجداني (الوجداني)</h4>
+            <p><small>يخص القيم والاتجاهات والميول التي يجب أن يكتسبها الطالب</small></p>
+            <div class="field">
+                <textarea placeholder="مثال: أن يقدر الطالب أهمية الرياضيات في الحياة اليومية..."></textarea>
+            </div>
+        </div>
+        
+        <h2>📚 الوسائل التعليمية</h2>
+        <div class="section">
+            <div class="checkbox-group">
+                <label class="checkbox-item"><input type="checkbox"> سبورة</label>
+                <label class="checkbox-item"><input type="checkbox"> حاسوب</label>
+                <label class="checkbox-item"><input type="checkbox"> عارض ضوئي</label>
+                <label class="checkbox-item"><input type="checkbox"> وسائل تعليمية</label>
+                <label class="checkbox-item"><input type="checkbox"> بطاقات</label>
+                <label class="checkbox-item"><input type="checkbox"> مجسمات</label>
+                <label class="checkbox-item"><input type="checkbox"> فيديو</label>
+                <label class="checkbox-item"><input type="checkbox"> أخرى</label>
+            </div>
+            <div class="field" style="margin-top: 10px;">
+                <input type="text" placeholder="حدد الوسائل المستخدمة بالتفصيل">
+            </div>
+        </div>
+        
+        <h2>🎬 التمهيد</h2>
+        <div class="section">
+            <div class="field">
+                <label>تمهيد للدرس (5 دقائق):</label>
+                <textarea placeholder="كيف ستبدأ الدرس؟ ما الأسئلة أو الأنشطة التي ستستخدمها لجذب انتباه الطلاب؟"></textarea>
+            </div>
+        </div>
+        
+        <h2>📝 خطوات سير الدرس</h2>
+        <div class="section lesson-steps">
+            <div class="step">
+                <span class="step-time">5 دقائق</span>
+                <strong>التمهيد والتهيئة:</strong>
+                <textarea placeholder="اكتب خطوات التمهيد..."></textarea>
+            </div>
+            <div class="step">
+                <span class="step-time">10 دقائق</span>
+                <strong>عرض الدرس:</strong>
+                <textarea placeholder="اكتب خطوات عرض الدرس..."></textarea>
+            </div>
+            <div class="step">
+                <span class="step-time">15 دقيقة</span>
+                <strong>التطبيق والتدريب:</strong>
+                <textarea placeholder="اكتب أنشطة التطبيق..."></textarea>
+            </div>
+            <div class="step">
+                <span class="step-time">10 دقائق</span>
+                <strong>التقويم الختامي:</strong>
+                <textarea placeholder="اكتب أسئلة التقويم..."></textarea>
+            </div>
+        </div>
+        
+        <h2>🎯 استراتيجيات التدريس</h2>
+        <div class="section">
+            <div class="checkbox-group">
+                <label class="checkbox-item"><input type="checkbox"> التعلم التعاوني</label>
+                <label class="checkbox-item"><input type="checkbox"> التعلم النشط</label>
+                <label class="checkbox-item"><input type="checkbox"> حل المشكلات</label>
+                <label class="checkbox-item"><input type="checkbox"> الاكتشاف</label>
+                <label class="checkbox-item"><input type="checkbox"> العصف الذهني</label>
+                <label class="checkbox-item"><input type="checkbox"> لعب الأدوار</label>
+                <label class="checkbox-item"><input type="checkbox"> التعلم الذاتي</label>
+                <label class="checkbox-item"><input type="checkbox"> أخرى</label>
+            </div>
+        </div>
+        
+        <h2>📋 الأنشطة والتطبيقات</h2>
+        <div class="section">
+            <div class="activity-box">
+                <strong>نشاط صفي:</strong>
+                <textarea placeholder="اكتب النشاط الصفي..."></textarea>
+            </div>
+            <div class="activity-box">
+                <strong>نشاط منزلي:</strong>
+                <textarea placeholder="اكتب النشاط المنزلي..."></textarea>
+            </div>
+        </div>
+        
+        <h2>📊 التقويم</h2>
+        <div class="section">
+            <div class="assessment-box">
+                <strong>التقويم القبلي:</strong>
+                <textarea placeholder="أسئلة التقويم القبلي..."></textarea>
+            </div>
+            <div class="assessment-box">
+                <strong>التقويم البنائي:</strong>
+                <textarea placeholder="أسئلة التقويم البنائي..."></textarea>
+            </div>
+            <div class="assessment-box">
+                <strong>التقويم الختامي:</strong>
+                <textarea placeholder="أسئلة التقويم الختامي..."></textarea>
+            </div>
+        </div>
+        
+        <h2>👥 الطلاب الذين يحتاجون دعم</h2>
+        <div class="support-section">
+            <h4>الطلاب المتعثرون</h4>
+            <table>
+                <thead>
+                    <tr>
+                        <th>اسم الطالب</th>
+                        <th>نقاط الضعف</th>
+                        <th>الإجراءات العلاجية</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <h2>⚠️ صعوبات التعلم والمشكلات الملحوظة</h2>
+        <div class="remedial-section">
+            <h4>المشكلات الملحوظة</h4>
+            <div class="field">
+                <textarea placeholder="اكتب المشكلات التي لاحظتها أثناء الدرس..."></textarea>
+            </div>
+        </div>
+        
+        <h2>💡 الإجراءات العلاجية والإثرائية</h2>
+        <div class="enrichment-section">
+            <h4>الإجراءات العلاجية</h4>
+            <div class="field">
+                <textarea placeholder="اكتب الإجراءات العلاجية للطلاب المتعثرين..."></textarea>
+            </div>
+        </div>
+        <div class="enrichment-section">
+            <h4>الإجراءات الإثرائية</h4>
+            <div class="field">
+                <textarea placeholder="اكتب الأنشطة الإثرائية للطلاب المتفوقين..."></textarea>
+            </div>
+        </div>
+        
+        <div class="signature-area">
+            <div class="signature-box">
+                <div class="line"></div>
+                <p>توقيع المعلم</p>
+            </div>
+            <div class="signature-box">
+                <div class="line"></div>
+                <p>توقيع المشرف</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- الصفحة الثالثة: سجل الدرجات -->
+<div id="page3" class="page-content">
+    <div class="page">
+        <h1>سجل الدرجات والتقويم</h1>
+        
+        <div class="section">
+            <div class="grid-3">
+                <div class="field">
+                    <label>الصف:</label>
+                    <input type="text">
+                </div>
+                <div class="field">
+                    <label>المادة:</label>
+                    <input type="text">
+                </div>
+                <div class="field">
+                    <label>الفصل الدراسي:</label>
+                    <select>
+                        <option>الأول</option>
+                        <option>الثاني</option>
+                        <option>الثالث</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        
+        <h2>📊 سجل درجات الاختبارات</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>م</th>
+                    <th>اسم الطالب</th>
+                    <th>اختبار قصير (10)</th>
+                    <th>واجب (10)</th>
+                    <th>مشاركة (10)</th>
+                    <th>اختبار شهري (30)</th>
+                    <th>المجموع (60)</th>
+                    <th>التقدير</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><input type="text"></td>
+                    <td><input type="number" class="grade-input" min="0" max="10"></td>
+                    <td><input type="number" class="grade-input" min="0" max="10"></td>
+                    <td><input type="number" class="grade-input" min="0" max="10"></td>
+                    <td><input type="number" class="grade-input" min="0" max="30"></td>
+                    <td><input type="number" class="grade-input" min="0" max="60"></td>
+                    <td><input type="text" class="grade-input"></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><input type="text"></td>
+                    <td><input type="number" class="grade-input" min="0" max="10"></td>
+                    <td><input type="number" class="grade-input" min="0" max="10"></td>
+                    <td><input type="number" class="grade-input" min="0" max="10"></td>
+                    <td><input type="number" class="grade-input" min="0" max="30"></td>
+                    <td><input type="number" class="grade-input" min="0" max="60"></td>
+                    <td><input type="text" class="grade-input"></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><input type="text"></td>
+                    <td><input type="number" class="grade-input" min="0" max="10"></td>
+                    <td><input type="number" class="grade-input" min="0" max="10"></td>
+                    <td><input type="number" class="grade-input" min="0" max="10"></td>
+                    <td><input type="number" class="grade-input" min="0" max="30"></td>
+                    <td><input type="number" class="grade-input" min="0" max="60"></td>
+                    <td><input type="text" class="grade-input"></td>
+                </tr>
+                <tr>
+                    <td>4</td>
+                    <td><input type="text"></td>
+                    <td><input type="number" class="grade-input" min="0" max="10"></td>
+                    <td><input type="number" class="grade-input" min="0" max="10"></td>
+                    <td><input type="number" class="grade-input" min="0" max="10"></td>
+                    <td><input type="number" class="grade-input" min="0" max="30"></td>
+                    <td><input type="number" class="grade-input" min="0" max="60"></td>
+                    <td><input type="text" class="grade-input"></td>
+                </tr>
+                <tr>
+                    <td>5</td>
+                    <td><input type="text"></td>
+                    <td><input type="number" class="grade-input" min="0" max="10"></td>
+                    <td><input type="number" class="grade-input" min="0" max="10"></td>
+                    <td><input type="number" class="grade-input" min="0" max="10"></td>
+                    <td><input type="number" class="grade-input" min="0" max="30"></td>
+                    <td><input type="number" class="grade-input" min="0" max="60"></td>
+                    <td><input type="text" class="grade-input"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h2>📈 إحصائيات الصف</h2>
+        <div class="grid-3">
+            <div class="field">
+                <label>أعلى درجة:</label>
+                <input type="number">
+            </div>
+            <div class="field">
+                <label>أدنى درجة:</label>
+                <input type="number">
+            </div>
+            <div class="field">
+                <label>متوسط الدرجات:</label>
+                <input type="number">
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- الصفحة الرابعة: متابعة الطلاب -->
+<div id="page4" class="page-content">
+    <div class="page">
+        <h1>متابعة تطور الطلاب</h1>
+        
+        <div class="section">
+            <div class="grid-2">
+                <div class="field">
+                    <label>الصف:</label>
+                    <input type="text">
+                </div>
+                <div class="field">
+                    <label>المادة:</label>
+                    <input type="text">
+                </div>
+            </div>
+        </div>
+        
+        <h2>📋 سجل المتابعة الفردية</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>اسم الطالب</th>
+                    <th>مستوى البداية</th>
+                    <th>مستوى الحالي</th>
+                    <th>التقدم</th>
+                    <th>ملاحظات</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="text"></td>
+                    <td>
+                        <select>
+                            <option>ضعيف</option>
+                            <option>مقبول</option>
+                            <option>جيد</option>
+                            <option>جيد جداً</option>
+                            <option>ممتاز</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option>ضعيف</option>
+                            <option>مقبول</option>
+                            <option>جيد</option>
+                            <option>جيد جداً</option>
+                            <option>ممتاز</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option>تحسن كبير</option>
+                            <option>تحسن</option>
+                            <option>ثابت</option>
+                            <option>تراجع</option>
+                        </select>
+                    </td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td><input type="text"></td>
+                    <td>
+                        <select>
+                            <option>ضعيف</option>
+                            <option>مقبول</option>
+                            <option>جيد</option>
+                            <option>جيد جداً</option>
+                            <option>ممتاز</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option>ضعيف</option>
+                            <option>مقبول</option>
+                            <option>جيد</option>
+                            <option>جيد جداً</option>
+                            <option>ممتاز</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option>تحسن كبير</option>
+                            <option>تحسن</option>
+                            <option>ثابت</option>
+                            <option>تراجع</option>
+                        </select>
+                    </td>
+                    <td><input type="text"></td>
+                </tr>
+                <tr>
+                    <td><input type="text"></td>
+                    <td>
+                        <select>
+                            <option>ضعيف</option>
+                            <option>مقبول</option>
+                            <option>جيد</option>
+                            <option>جيد جداً</option>
+                            <option>ممتاز</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option>ضعيف</option>
+                            <option>مقبول</option>
+                            <option>جيد</option>
+                            <option>جيد جداً</option>
+                            <option>ممتاز</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select>
+                            <option>تحسن كبير</option>
+                            <option>تحسن</option>
+                            <option>ثابت</option>
+                            <option>تراجع</option>
+                        </select>
+                    </td>
+                    <td><input type="text"></td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <h2>🎯 خطة التحسين</h2>
+        <div class="section">
+            <div class="field">
+                <label>الأهداف المرجوة خلال الفترة القادمة:</label>
+                <textarea placeholder="اكتب الأهداف التي تسعى لتحقيقها..."></textarea>
+            </div>
+            <div class="field">
+                <label>الاستراتيجيات المقترحة:</label>
+                <textarea placeholder="اكتب الاستراتيجيات التي ستستخدمها..."></textarea>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- الصفحة الخامسة: الملاحظات -->
+<div id="page5" class="page-content">
+    <div class="page">
+        <h1>صفحة الملاحظات</h1>
+        
+        <div class="notes-area">
+            <div class="field">
+                <label>ملاحظات عامة:</label>
+                <textarea style="min-height: 150px;" placeholder="اكتب ملاحظاتك هنا..."></textarea>
+            </div>
+        </div>
+        
+        <div class="section" style="margin-top: 20px;">
+            <h3>💡 أفكار وتوصيات</h3>
+            <div class="field">
+                <textarea placeholder="اكتب أفكارك وتوصياتك هنا..."></textarea>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>📌 متطلبات الدرس القادم</h3>
+            <div class="field">
+                <textarea placeholder="اكتب ما تحتاجه للدرس القادم..."></textarea>
+            </div>
+        </div>
+        
+        <div class="section">
+            <h3>🔄 تقييم ذاتي للدرس</h3>
+            <div class="grid-2">
+                <div class="field">
+                    <label>ما الذي نجح في الدرس؟</label>
+                    <textarea placeholder="اكتب هنا..."></textarea>
+                </div>
+                <div class="field">
+                    <label>ما الذي يحتاج تحسين؟</label>
+                    <textarea placeholder="اكتب هنا..."></textarea>
+                </div>
+            </div>
+        </div>
+        
+        <div class="signature-area">
+            <div class="signature-box">
+                <div class="line"></div>
+                <p>توقيع المعلم</p>
+            </div>
+            <div class="signature-box">
+                <div class="line"></div>
+                <p>التاريخ</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+</div><!-- نهاية main-content -->
+
+<script>
+    function showPage(pageId) {
+        // إخفاء جميع الصفحات
+        document.querySelectorAll('.page-content').forEach(page => {
+            page.classList.remove('active');
+        });
+        
+        // إظهار الصفحة المطلوبة
+        document.getElementById(pageId).classList.add('active');
+        
+        // تحديث القائمة الجانبية
+        document.querySelectorAll('.sidebar-menu a').forEach(link => {
+            link.classList.remove('active');
+        });
+        event.target.closest('a').classList.add('active');
+    }
+</script>
+
+</body>
+</html>
